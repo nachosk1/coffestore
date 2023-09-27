@@ -7,7 +7,7 @@ export default function Sidebar() {
     return (
         <>
             <div className="w-full flex items-center justify-center py-4">
-                <Image src={'/assets/img/logo.svg'} width={150} height={100} alt="Imagen logotipo" />
+                <Image src={'/assets/img/logo.svg'} width={200} height={200} alt="Imagen logotipo" priority={true} style={{ width: '150px', height: '150px' }}/>
             </div>
             <nav className="mt-5">
                 {categories.map(category => (

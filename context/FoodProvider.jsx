@@ -6,6 +6,8 @@ const FoodContext = createContext();
 export const FoodProvider = ({ children }) => {
     const [categories, setCategories] = useState([]);
     const [categoryCurrent, setCategoryCurrent] = useState({})
+    const [product, setProduct] = useState({})
+    const [modal, setModal] = useState(false)
 
     const getCategories = async () => {
         try {
@@ -29,13 +31,26 @@ export const FoodProvider = ({ children }) => {
         setCategoryCurrent(category[0])
     }
 
+    const handleSetProduct = product => {
+        setProduct(product)
+    }
+
+    const handleChangeModal = () => {
+        setModal(!modal)
+    }
+
 
     return (
         <FoodContext.Provider
             value={{
                 categories,
                 categoryCurrent,
-                handleClickCategory
+                handleClickCategory,
+                product,
+                handleSetProduct,
+                modal,
+                handleChangeModal,
+                
             }}>
             {children}
         </FoodContext.Provider>
