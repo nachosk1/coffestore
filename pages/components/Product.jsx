@@ -3,7 +3,7 @@ import { formatMoney } from '../../helpers/index'
 import { useFood } from "../../context/FoodProvider"
 
 export default function Product({ product }) {
-    const { handleSetProduct } = useFood()
+    const { handleChangeModal, handleSetProduct } = useFood()
     const { name, image, price } = product
 
 

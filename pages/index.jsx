@@ -6,10 +6,9 @@ export default function Home() {
   const { categoryCurrent } = useFood()
 
   let nameCategory = categoryCurrent?.name || ''
-  console.log(categoryCurrent?.name)
 
   return (
-    <Layout page={`Menu`}>
+    <Layout page={`Cafetería Menu ${nameCategory}`}>
       <h1 className='text-4xl font-black'>{categoryCurrent?.name}</h1>
       <p className='text-2xl my-10'>
         Elige y personaliza tu pedido a continuación

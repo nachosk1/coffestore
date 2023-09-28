@@ -1,8 +1,13 @@
 import Head from "next/head"
-import { Inter } from 'next/font/google'
+import Steps from "../pages/components/Steps"
+import ModalProduct from "../pages/components/ModalProduct"
 import Sidebar from '@/pages/components/Sidebar'
 import Modal from "react-modal"
 import { useFood } from "../context/FoodProvider"
+import { ToastContainer } from "react-toastify"   // poder llamar el toast para poderlo mostrar
+import { Inter } from 'next/font/google'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +30,7 @@ export default function Layout({ children, page }) {
   return (
     <div className={inter.className}>
       <Head>
-        <title>Café - {page}</title>
+        <title>{`${page}`}</title>
         <meta name="description" content="Cafetería, tu lugar para comer" />
       </Head>
       <div className='flex'>
@@ -34,15 +39,20 @@ export default function Layout({ children, page }) {
         </aside>
         <main className='md:w-8/12 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll'>
           <div className="p-10">
+            <Steps />
             {children}
           </div>
         </main>
       </div>
       {modal && (
-        <Modal>
-          <h1>modal..</h1>
+        <Modal
+          isOpen={modal}
+          style={customStyles}
+        >
+          <ModalProduct />
         </Modal>
       )}
+      <ToastContainer />
     </div>
   )
 }
