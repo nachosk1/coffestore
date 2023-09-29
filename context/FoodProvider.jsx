@@ -81,7 +81,7 @@ export const FoodProvider = ({ children }) => {
         e.preventDefault()
 
         try {   //axios por default recibe una conexion de tipo GET
-            await axios.post('/api/order', { order, name, total, date: Date.now().toString() })
+            await axios.post('/api/orders', { order, name, total, date: Date.now().toString() })
 
             // Resetear la app
             setCategoryCurrent(categories[0])
