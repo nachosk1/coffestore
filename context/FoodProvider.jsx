@@ -80,9 +80,24 @@ export const FoodProvider = ({ children }) => {
     const placeOrder = async e => {   //colocar orden y como va interactuar con la base de datos se coloca async
         e.preventDefault()
 
+        try {   //axios por default recibe una conexion de tipo GET
+            await axios.post('/api/order', { order, name, total, date: Date.now().toString() })
 
-        console.log(order)
-        console.log(name)
+            // Resetear la app
+            setCategoryCurrent(categories[0])
+            setOrder([])
+            setName('')
+            setTotal(0)
+
+            toast.success('Pedido Realizado Correctamente')
+
+            setTimeout(() => {
+                router.push('/')
+            }, 3000)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
