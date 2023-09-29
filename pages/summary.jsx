@@ -14,6 +14,7 @@ export default function Summary() {
             ) : (
                 order.map(product => (
                     <SummaryProduct
+                        key={product.id}
                         product={product}
                     />
                 ))

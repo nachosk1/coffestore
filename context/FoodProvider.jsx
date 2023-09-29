@@ -11,6 +11,8 @@ export const FoodProvider = ({ children }) => {
     const [product, setProduct] = useState({})
     const [modal, setModal] = useState(false)
     const [order, setOrder] = useState([])
+    const [name, setName] = useState('')
+    const [total, setTotal] = useState(0)
 
     const router = useRouter()
 
@@ -30,6 +32,11 @@ export const FoodProvider = ({ children }) => {
     useEffect(() => {
         setCategoryCurrent(categories[0])
     }, [categories]) //si no tiene categories, no va a cargar ya que el useEffect anterior donde busca la categoria en la base de datos puede tardar y este useEffect funcione correctamente
+
+    useEffect(() => {
+        const newTotal = order.reduce((total, product) => (product.price * product.amount) + total, 0)         //reduce es un acumulador y su valor inicial es 0
+        setTotal(newTotal)
+    }, [order])
 
     const handleClickCategory = id => {
         const category = categories.filter(cat => cat.id === id)
@@ -70,6 +77,14 @@ export const FoodProvider = ({ children }) => {
         setOrder(productUpdated)
     }
 
+    const placeOrder = async e => {   //colocar orden y como va interactuar con la base de datos se coloca async
+        e.preventDefault()
+
+
+        console.log(order)
+        console.log(name)
+    }
+
     return (
         <FoodContext.Provider
             value={{
@@ -83,7 +98,11 @@ export const FoodProvider = ({ children }) => {
                 handleAddOrder,
                 order,
                 handleEditAmounts,
-                handleDeleteProduct
+                handleDeleteProduct,
+                name,
+                setName,
+                placeOrder,
+                total
             }}>
             {children}
         </FoodContext.Provider>
